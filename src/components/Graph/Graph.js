@@ -12,7 +12,7 @@ const Graph = forwardRef((props, ref) => {
   //   return () => window.removeEventListener('resize', handleResize);
   // }, []);
 
-  const { innerWidth: width, innerHeight: height } = window;
+  const { innerWidth: width} = window;
 
   const findLargestElement = (arr) => {
     // console.log(width, height )
