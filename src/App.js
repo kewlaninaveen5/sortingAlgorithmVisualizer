@@ -155,58 +155,6 @@ const App = () => {
           setInputArray(oldArray)
           return
         }
-
-        // for (i1; i1 < oldArray.length; i1++){
-        //   let temp, key = oldArray[i1]
-        //   while (j1 >= 0 && oldArray[j1] > key) {
-        //     oldArray[j1+1] = oldArray[j1]
-        //     j1 = j1-1
-        //   }
-        //   oldArray[j1] = key;
-        // }
-
-
-        // barRef.current.children[oldArray.length-1].style.backgroundColor = "#8888ff";
-        // if (i1 < (oldArray.length - 1)) {
-        //   let indexAtMinimumValue = specialStoredValue;
-        //   // const firstNode = barRef.current.children[i1]
-        //   // firstNode.style.backgroundColor = "blue"
-        //   if (j1 < (oldArray.length))
-        //     {
-        //   if (i1 === j1 -1 )
-        //     barRef.current.children[j1-1].style.backgroundColor = "blue";
-        //   else if (indexAtMinimumValue === j1-1)
-        //     barRef.current.children[j1-1].style.backgroundColor = "green";
-        //   else barRef.current.children[j1-1].style.backgroundColor = "#8888ff";
-        //     const secondNode = barRef.current.children[j1]
-        //     secondNode.style.backgroundColor = "pink"
-        //     if (oldArray[indexAtMinimumValue] > oldArray[j1]) {
-        //       if (indexAtMinimumValue !== i1){
-        //         barRef.current.children[indexAtMinimumValue].style.backgroundColor = "#8888ff";
-        //       }
-        //         indexAtMinimumValue = j1;
-        //         barRef.current.children[j1].style.backgroundColor = "green";
-        //         setSpecialStoredValue(j1);
-        //     }
-        //     setJ(j1 + 1)
-        //     return
-        //   }
-        //   if (indexAtMinimumValue !== i1) {
-        //     const oldSwapCount = swapCounter;
-        //     setSwapCounter(oldSwapCount + 1);
-        //   }
-        //   const firstElementValue = oldArray[i1];
-        //   oldArray[i1] = oldArray[indexAtMinimumValue];
-        //   oldArray[indexAtMinimumValue] = firstElementValue;
-        //   if (indexAtMinimumValue !== i1)
-        //   barRef.current.children[indexAtMinimumValue].style.backgroundColor = "#8888ff";
-        //   setI(i1 + 1);
-        //   setSpecialStoredValue(i1+1)
-        //   setJ(i1 + 2)
-        //   setInputArray(oldArray);
-        //   return
-        //   j1 = 0;
-        // }
         const nodes = barRef.current.children
         for (let n = 0; n < nodes.length; n++) {
           nodes[n].style.backgroundColor = "#99c234"

@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect } from 'react'
+import React, {forwardRef } from 'react'
 import './Graph.css';
 
 const Graph = forwardRef((props, ref) => {

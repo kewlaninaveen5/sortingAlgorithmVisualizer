@@ -3,7 +3,7 @@ import  './InstructionsManual.css';
 
 function InstructionsManual() {
 
-    const { innerWidth: width, innerHeight: height } = window;
+    const { innerWidth: width} = window;
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const modalToggleHandler = () => {
