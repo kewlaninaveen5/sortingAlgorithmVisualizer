@@ -1,0 +1,30 @@
+.modal-container{
+    position: absolute;
+    display: flex;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    transition: 1000ms;
+    background-color: #ededed;
+}
+
+.modal-open {
+    width: 25vw;
+    transition: 1000ms;
+    color: black;
+    
+}
+
+.modal-closed {
+    transition: 1000ms;
+    display: none;
+}
+
+.modal-toggle-button {
+    background-color: #ededed;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+    margin-top: 200px;
+    height: 40px;
+}
