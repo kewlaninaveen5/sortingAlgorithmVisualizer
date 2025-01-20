@@ -20,6 +20,13 @@
   
 }
 
+.graph-on-screen {
+  text-align: center;
+  margin: auto;
+}
+
+
+
 .choose-array-size {
   text-align: center;
   margin: auto;
@@ -90,13 +97,11 @@
   background-color: #61dafb;
   color: #282c34;
 }
-
 .button:disabled {
   cursor: not-allowed;
   color: darkgray;
   background-color: gray;
 }
-
 .input-range:hover {
   background-color: #282c34;
   color: #61dafb;
@@ -105,32 +110,19 @@
   vertical-align: top;
 }
 
-
-
 @media (max-width: 768px) {
-
   .page-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
   }
-  
-
-
+  .graph-on-screen h1 {
+    text-align: center;
+    margin: auto;
+    font-size: 24px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 }
-
-.App-header {
-
-}
-
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

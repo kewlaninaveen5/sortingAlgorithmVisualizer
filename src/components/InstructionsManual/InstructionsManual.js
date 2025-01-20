@@ -3,6 +3,7 @@ import  './InstructionsManual.css';
 
 function InstructionsManual() {
 
+    const { innerWidth: width, innerHeight: height } = window;
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const modalToggleHandler = () => {
@@ -16,22 +17,22 @@ function InstructionsManual() {
             display: "flex",
             zIndex: "1",
             top: "0px",
-            left: isModalOpen? "0vw" : "-20vw",
+            left: width > 768 ? isModalOpen? "0vw" : "-20vw" : isModalOpen? "0vw" : "-57vw"  ,
             height: "100vh",
-            width: "26vw",
+            width: width > 768 ? "26vw" : "76vw",
             transition: "1000ms",
             // backgroundColor: isModalOpen? "rgba(40,44,52, 1)" : "rgba(40,44,52, 0.5)",
         },
         
         modal: {
             // display: isModalOpen? "inline-block" : "none",
-            width: "20vw",
+            width: width > 768 ? "20vw" : "70vw",
             backgroundColor: "#ffcccc",
             transition: "1000ms",
         },
         
         modalToggleButton: {
-            width: "6vw",
+            width: "80px",
             transition: "1000ms",
             backgroundColor: "#ffcccc",
             border: "none",
@@ -44,7 +45,7 @@ function InstructionsManual() {
     // const manual = <div className={"modal-container"}>
     const manual = <div style={styles.modalContainer}>
         <div style={styles.modal}>
-            Hariom
+           Add Instructions here in the end.
         </div>
         <button onClick={() => modalToggleHandler()} style={styles.modalToggleButton}>
             {isModalOpen ? <div>Close</div> : <div>Instructions</div>}

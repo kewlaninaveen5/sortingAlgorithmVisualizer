@@ -28,3 +28,13 @@
     margin-top: 200px;
     height: 40px;
 }
+
+@media (max-width: 768px) {
+    .modal-open {
+        width: 75vw;
+        transition: 1000ms;
+        color: black;
+        
+    }
+
+  }
