@@ -17,12 +17,12 @@ const App = () => {
   const [sorting, setSorting] = useState(false);
   const [swapCounter, setSwapCounter] = useState(0);
   const [delay, setDelay] = useState(5);
-  const [minValueIndex, setMinValueIndex] = useState(0);
+  const [specialStoredValue, setSpecialStoredValue] = useState(0);
 
   const BUBBLE_SORT = "BUBBLE SORT"
   const SELECTION_SORT = "SELECTION SORT"
-  const MERGE_SORT = "MERGE SORT"
-  // const INSERTION_SORT = "INSERTION SORT"
+  // const MERGE_SORT = "MERGE SORT"
+  const INSERTION_SORT = "INSERTION SORT"
   // const QUICK_SORT = "QUICK SORT"
 
 
@@ -76,7 +76,7 @@ const App = () => {
         let i1 = i, j1 = j;
         barRef.current.children[oldArray.length-1].style.backgroundColor = "#8888ff";
         if (i1 < (oldArray.length - 1)) {
-          let indexAtMinimumValue = minValueIndex;
+          let indexAtMinimumValue = specialStoredValue;
           const firstNode = barRef.current.children[i1]
           firstNode.style.backgroundColor = "blue"
           if (j1 < (oldArray.length))
@@ -94,7 +94,7 @@ const App = () => {
               }
                 indexAtMinimumValue = j1;
                 barRef.current.children[j1].style.backgroundColor = "green";
-                setMinValueIndex(j1);
+                setSpecialStoredValue(j1);
             }
             setJ(j1 + 1)
             return
@@ -109,7 +109,7 @@ const App = () => {
           if (indexAtMinimumValue !== i1)
           barRef.current.children[indexAtMinimumValue].style.backgroundColor = "#8888ff";
           setI(i1 + 1);
-          setMinValueIndex(i1+1)
+          setSpecialStoredValue(i1+1)
           setJ(i1 + 2)
           setInputArray(oldArray);
           return
@@ -123,54 +123,90 @@ const App = () => {
         setSortType("")
       }, delay);
     }
-  }, [i, j, inputArray, swapCounter, sorting, sortType, delay, minValueIndex]);
+  }, [i, j, inputArray, swapCounter, sorting, sortType, delay, specialStoredValue]);
 
   useEffect(() => {
-    if (sorting && sortType === MERGE_SORT) {
+    if (sorting && sortType === INSERTION_SORT) {
       setTimeout(() => {
-        let oldArray = [...inputArray]
-        let i1 = i, j1 = j;
-        barRef.current.children[oldArray.length-1].style.backgroundColor = "#8888ff";
-        if (i1 < (oldArray.length - 1)) {
-          let indexAtMinimumValue = minValueIndex;
-          const firstNode = barRef.current.children[i1]
-          firstNode.style.backgroundColor = "blue"
-          if (j1 < (oldArray.length))
-            {
-          if (i1 === j1 -1 )
-            barRef.current.children[j1-1].style.backgroundColor = "blue";
-          else if (indexAtMinimumValue === j1-1)
-            barRef.current.children[j1-1].style.backgroundColor = "green";
-          else barRef.current.children[j1-1].style.backgroundColor = "#8888ff";
-            const secondNode = barRef.current.children[j1]
-            secondNode.style.backgroundColor = "pink"
-            if (oldArray[indexAtMinimumValue] > oldArray[j1]) {
-              if (indexAtMinimumValue !== i1){
-                barRef.current.children[indexAtMinimumValue].style.backgroundColor = "#8888ff";
-              }
-                indexAtMinimumValue = j1;
-                barRef.current.children[j1].style.backgroundColor = "green";
-                setMinValueIndex(j1);
-            }
-            setJ(j1 + 1)
-            return
+        let oldArray = [...inputArray];
+        let i1 = i;
+        let j1 = j;
+
+        if (i1 < oldArray.length) {
+          if (j1 !== -1) barRef.current.children[j1].style.backgroundColor = "pink"; 
+          barRef.current.children[i1].style.backgroundColor = "red";
+          let key = specialStoredValue > 0 ? specialStoredValue : oldArray[i1];
+          if (j1 >= 0 && oldArray[j1] > key){
+            if (j1+1 !== i1)
+            barRef.current.children[j1+1].style.backgroundColor = "pink";
+            barRef.current.children[j1].style.backgroundColor = "green";
+            oldArray[j1+1] = oldArray[j1];
+            setJ(j1 -1);
+            setInputArray(oldArray);
+            setSpecialStoredValue(key);
+            
+            return;
           }
-          if (indexAtMinimumValue !== i1) {
-            const oldSwapCount = swapCounter;
-            setSwapCounter(oldSwapCount + 1);
-          }
-          const firstElementValue = oldArray[i1];
-          oldArray[i1] = oldArray[indexAtMinimumValue];
-          oldArray[indexAtMinimumValue] = firstElementValue;
-          if (indexAtMinimumValue !== i1)
-          barRef.current.children[indexAtMinimumValue].style.backgroundColor = "#8888ff";
-          setI(i1 + 1);
-          setMinValueIndex(i1+1)
-          setJ(i1 + 2)
-          setInputArray(oldArray);
+          j1 === -1 ? oldArray[0] = key : oldArray[j1+1] = key;
+          barRef.current.children[j1+1].style.backgroundColor = "pink";
+          setI(i1 + 1)
+          setSpecialStoredValue(0)
+          setJ(i1)
+          setInputArray(oldArray)
           return
-          j1 = 0;
         }
+
+        // for (i1; i1 < oldArray.length; i1++){
+        //   let temp, key = oldArray[i1]
+        //   while (j1 >= 0 && oldArray[j1] > key) {
+        //     oldArray[j1+1] = oldArray[j1]
+        //     j1 = j1-1
+        //   }
+        //   oldArray[j1] = key;
+        // }
+
+
+        // barRef.current.children[oldArray.length-1].style.backgroundColor = "#8888ff";
+        // if (i1 < (oldArray.length - 1)) {
+        //   let indexAtMinimumValue = specialStoredValue;
+        //   // const firstNode = barRef.current.children[i1]
+        //   // firstNode.style.backgroundColor = "blue"
+        //   if (j1 < (oldArray.length))
+        //     {
+        //   if (i1 === j1 -1 )
+        //     barRef.current.children[j1-1].style.backgroundColor = "blue";
+        //   else if (indexAtMinimumValue === j1-1)
+        //     barRef.current.children[j1-1].style.backgroundColor = "green";
+        //   else barRef.current.children[j1-1].style.backgroundColor = "#8888ff";
+        //     const secondNode = barRef.current.children[j1]
+        //     secondNode.style.backgroundColor = "pink"
+        //     if (oldArray[indexAtMinimumValue] > oldArray[j1]) {
+        //       if (indexAtMinimumValue !== i1){
+        //         barRef.current.children[indexAtMinimumValue].style.backgroundColor = "#8888ff";
+        //       }
+        //         indexAtMinimumValue = j1;
+        //         barRef.current.children[j1].style.backgroundColor = "green";
+        //         setSpecialStoredValue(j1);
+        //     }
+        //     setJ(j1 + 1)
+        //     return
+        //   }
+        //   if (indexAtMinimumValue !== i1) {
+        //     const oldSwapCount = swapCounter;
+        //     setSwapCounter(oldSwapCount + 1);
+        //   }
+        //   const firstElementValue = oldArray[i1];
+        //   oldArray[i1] = oldArray[indexAtMinimumValue];
+        //   oldArray[indexAtMinimumValue] = firstElementValue;
+        //   if (indexAtMinimumValue !== i1)
+        //   barRef.current.children[indexAtMinimumValue].style.backgroundColor = "#8888ff";
+        //   setI(i1 + 1);
+        //   setSpecialStoredValue(i1+1)
+        //   setJ(i1 + 2)
+        //   setInputArray(oldArray);
+        //   return
+        //   j1 = 0;
+        // }
         const nodes = barRef.current.children
         for (let n = 0; n < nodes.length; n++) {
           nodes[n].style.backgroundColor = "#99c234"
@@ -225,16 +261,16 @@ const App = () => {
     setSorting(true)
     setI(0);
     setJ(1);
-    setMinValueIndex(0);
+    setSpecialStoredValue(0);
     setSortType(SELECTION_SORT)
   }
 
-  const startMergeSort = () => {
+  const startInsertionSort = () => {
     setSorting(true)
-    setI(0);
-    setJ(1);
-    setMinValueIndex(0);
-    setSortType(MERGE_SORT)
+    setI(1);
+    setJ(0);
+    setSpecialStoredValue(0);
+    setSortType(INSERTION_SORT)
   }
 
   return (
@@ -267,19 +303,20 @@ const App = () => {
           <button disabled={sorting ? true : false} className="button" onClick={() => startSelectionSort()}>
             start Selection sort
           </button>
-          <button disabled={sorting ? true : false} className="button" onClick={() => startMergeSort()}>
+          {/* <button disabled={sorting ? true : false} className="button" onClick={() => startMergeSort()}>
             start Merge sort
-          </button>
-          {/* <button disabled={sorting ? true : false} className="button" onClick={() => bubbleSort()}>
+          </button> */}
+          <button disabled={sorting ? true : false} className="button" onClick={() => startInsertionSort()}>
             start Insertion sort
           </button>
-          <button disabled={sorting ? true : false} className="button" onClick={() => bubbleSort()}>
+          {/* <button disabled={sorting ? true : false} className="button" onClick={() => bubbleSort()}>
             start Quick sort
           </button> */}
 
           <div className="input-range button">
             <div>Choose Speed: </div>
             <input
+            disabled={sorting ? true : false}
               type="range"
               // ref="inputRangeRef" 
               onChange={(e) => changeSpeedHandler(e)}
@@ -297,8 +334,6 @@ const App = () => {
           <button disabled={sorting ? false : true} className="button" onClick={() => stopSortingHandler()}>
             Stop Sorting
           </button>
-
-
 
         </div>
       </div>
