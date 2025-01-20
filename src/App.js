@@ -216,7 +216,7 @@ const App = () => {
         setSortType("")
       }, delay);
     }
-  }, [i, j, inputArray, swapCounter, sorting, sortType, delay]);
+  }, [i, j, inputArray, swapCounter, sorting, sortType, delay, specialStoredValue]);
 
   const lengthOfArrayHandler = (e) => {
     let v = parseInt(e.target.value);
