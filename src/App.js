@@ -10,6 +10,8 @@ const App = () => {
 
 
   const [inputArray, setInputArray] = useState([12,5,7,13,5,78,92,4]);
+  const [auxilliaryArray, setAuxilliaryArray] = useState([]);
+  const [subArraysLowsAndHighs, setSubArraysLowsAndHighs] = useState([]);
   const [lenghtOfArray, setLenghtOfArray] = useState(52);
   const [i, setI] = useState(0);
   const [j, setJ] = useState(0);
@@ -23,7 +25,7 @@ const App = () => {
   const SELECTION_SORT = "SELECTION SORT"
   // const MERGE_SORT = "MERGE SORT"
   const INSERTION_SORT = "INSERTION SORT"
-  // const QUICK_SORT = "QUICK SORT"
+  const QUICK_SORT = "QUICK SORT"
 
 
 
@@ -166,6 +168,144 @@ const App = () => {
     }
   }, [i, j, inputArray, swapCounter, sorting, sortType, delay, specialStoredValue]);
 
+  useEffect(() => {
+    if (sorting && sortType === QUICK_SORT) {
+      setTimeout(() => {
+
+        const oldArray = [...inputArray];
+        const aux = [...auxilliaryArray]
+        let n = 0, j1 = null, i1 = null, pivotIndex = null;
+
+        if (j === -2) {
+          while (n < oldArray.length ) {
+            if (aux[n] === 0){
+              j1 = n;
+              i1 = j1-1;
+              break;
+            }
+            console.log(n);
+            n++;
+          } 
+        } else {
+          j1 = j;
+          i1 = i;
+          n = j;
+        }
+        if (j1 == null){
+          const nodes = barRef.current.children
+          for (let n = 0; n < nodes.length; n++) {
+            nodes[n].style.backgroundColor = "#99c234"
+          }
+          // barRef.current.children
+          setSorting(false);
+          setSortType("")
+          return;
+        }
+        
+        console.log(n);
+
+        while (n < oldArray.length ) {
+          if (aux[n] === oldArray[n]){
+            pivotIndex = n-1;
+            break;
+          }
+          barRef.current.children[n].style.backgroundColor = "#8888ff";
+          console.log(n);
+          n++;
+        }
+        pivotIndex = pivotIndex === null ? oldArray.length-1 :  pivotIndex ;
+        barRef.current.children[pivotIndex].style.backgroundColor = "red";
+
+
+        if (j1 < pivotIndex){
+          if (j1)
+        barRef.current.children[j1-1].style.backgroundColor = "#8888ff";
+        barRef.current.children[j1].style.backgroundColor = "pink";
+
+          if(oldArray[j1] < oldArray[pivotIndex]) {
+            i1++;
+            barRef.current.children[i1].style.backgroundColor = "#ff9900";
+            // barRef.current.children[j1].style.backgroundColor = "green";
+              let temp = oldArray[j1];
+              oldArray[j1] = oldArray[i1];
+              oldArray[i1] = temp;
+              setInputArray(oldArray);
+              setI(i1)
+              setJ(j1+1)  
+              return;
+            }
+            setI(i1)
+            setJ(j1 +1)
+            return
+        }
+        if (j1)
+        barRef.current.children[j1-1].style.backgroundColor = "#8888ff";
+        let temp = oldArray[i1 +1];
+        oldArray[i1+1] = oldArray[pivotIndex] ;
+        aux[i1+1] = oldArray[pivotIndex];
+        barRef.current.children[i1+1].style.backgroundColor = "green";
+        oldArray[pivotIndex] = temp;
+        barRef.current.children[pivotIndex].style.backgroundColor = "#8888ff";
+        setInputArray(oldArray);
+        setAuxilliaryArray(aux);
+        setJ(-2)
+        return;
+        // const oldArrayOfLowsAndHighs = subArraysLowsAndHighs;
+        // oldArrayOfLowsAndHighs.forEach((element,key) => {
+        //   let i1 = element[0]-1
+        //   let j1 = element[0]
+        //   let pivotIndex = null
+          // console.log(i1, " ", j1)
+
+        //   for(j1; j1 < pivotIndex ; j1++) {
+        //     if(oldArray[j1] <oldArray[pivotIndex] ) {
+        //       i1++;
+        //       let temp = oldArray[j1];
+        //       oldArray[j1] = oldArray[i1];
+        //       oldArray[i1] = temp;
+        //     }
+        //   }
+        // })
+        // let i1 = i;
+        // let j1 = j;
+
+        // if (i1 < oldArray.length) {
+        //   if (j1 !== -1) barRef.current.children[j1].style.backgroundColor = "pink"; 
+        //   barRef.current.children[i1].style.backgroundColor = "red";
+        //   let key = specialStoredValue > 0 ? specialStoredValue : oldArray[i1];
+        //   if (j1 >= 0 && oldArray[j1] > key){
+        //     if (j1+1 !== i1)
+        //     barRef.current.children[j1+1].style.backgroundColor = "pink";
+        //     barRef.current.children[j1].style.backgroundColor = "green";
+        //     oldArray[j1+1] = oldArray[j1];
+        //     setJ(j1 -1);
+        //     setInputArray(oldArray);
+        //     setSpecialStoredValue(key);
+        //     return;
+        //   }
+        //   j1 === -1 ? oldArray[0] = key : oldArray[j1+1] = key;
+        //   barRef.current.children[j1+1].style.backgroundColor = "pink";
+        //   setI(i1 + 1)
+        //   setSpecialStoredValue(0)
+        //   setJ(i1)
+        //   setInputArray(oldArray)
+        //   return
+        // }
+        // const nodes = barRef.current.children
+        // for (let n = 0; n < nodes.length; n++) {
+        //   nodes[n].style.backgroundColor = "#99c234"
+        // }
+        // // barRef.current.children
+        // setSorting(false);
+        // setSortType("")
+      }, delay);
+    }
+  }, [i, j, inputArray, swapCounter, sorting, sortType, delay, specialStoredValue,subArraysLowsAndHighs ]);
+  
+  const stopSortingHandler = () => {
+    setSorting(false)
+  }
+
   const lengthOfArrayHandler = (e) => {
     let v = parseInt(e.target.value);
     console.log(v);
@@ -194,9 +334,6 @@ const App = () => {
     }
   }
 
-  const stopSortingHandler = () => {
-    setSorting(false)
-  }
 
   const bubbleSort = () => {
     setSorting(true)
@@ -219,6 +356,22 @@ const App = () => {
     setJ(0);
     setSpecialStoredValue(0);
     setSortType(INSERTION_SORT)
+  }
+
+  const startQuickSort = () => {
+    const oldArray = inputArray 
+    const aux = [];
+    for (let n = 0; n < oldArray.length; n++){
+      aux.push(0)
+    }
+    console.log(aux)
+    setAuxilliaryArray(aux)
+    setSorting(true)
+    setSubArraysLowsAndHighs([[0, (oldArray.length-1)]])
+    setI(-1);
+    setJ(-2);
+    setSpecialStoredValue(0);
+    setSortType(QUICK_SORT)
   }
 
   return (
@@ -246,20 +399,20 @@ const App = () => {
             Generate random array
           </button>
           <button disabled={sorting ? true : false} className="button" onClick={() => bubbleSort()}>
-            start bubble sort
+            start {BUBBLE_SORT}
           </button>
           <button disabled={sorting ? true : false} className="button" onClick={() => startSelectionSort()}>
-            start Selection sort
+            start {SELECTION_SORT}
           </button>
           {/* <button disabled={sorting ? true : false} className="button" onClick={() => startMergeSort()}>
             start Merge sort
           </button> */}
           <button disabled={sorting ? true : false} className="button" onClick={() => startInsertionSort()}>
-            start Insertion sort
+            start {INSERTION_SORT}
           </button>
-          {/* <button disabled={sorting ? true : false} className="button" onClick={() => bubbleSort()}>
-            start Quick sort
-          </button> */}
+          <button disabled={sorting ? true : false} className="button" onClick={() => startQuickSort()}>
+            start {QUICK_SORT}
+          </button>
 
           <div className="input-range button">
             <div>Choose Speed: </div>
