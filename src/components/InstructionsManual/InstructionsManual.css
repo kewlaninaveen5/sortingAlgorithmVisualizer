@@ -29,12 +29,66 @@
     height: 40px;
 }
 
+.instructions-text {
+    color: black;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.instructions-title {
+    font-size: 30px;
+    align-self: center;
+    text-align: center;
+
+}
+
+.instructions-list-item {
+    margin: 10px;
+}
+
+.instructions-button {
+    display: inline;
+    margin: 2px;
+    border: none;
+    padding: 5px;
+    font-family: "Roboto";
+    font-size: 12px;
+    background-color: #282c34;
+    color: #61dafb;
+    border-radius: 6px;
+    transition: 300ms;
+  }
+
+  .instructions-button-disabled {
+
+    display: inline;
+    margin: 2px;
+    border: none;
+    padding: 5px;
+    font-family: "Roboto";
+    font-size: 12px;
+    border-radius: 6px;
+    transition: 300ms;
+    color: #282c34;
+    background-color: gray;
+  }
+
 @media (max-width: 768px) {
     .modal-open {
         width: 75vw;
         transition: 1000ms;
         color: black;
         
+    }
+    .instructions-text {
+        color: black;
+        font-size: 16px;
+        padding: 0px;
+    }
+    .instructions-list-item {
+        margin: 0px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
   }

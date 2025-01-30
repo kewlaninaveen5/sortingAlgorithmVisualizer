@@ -37,7 +37,7 @@ function InstructionsManual() {
             backgroundColor: "#ffcccc",
             border: "none",
             borderRadius: "0px 10px 10px 0px",
-            marginTop: "200px",
+            marginTop: "500px",
             height: "50px",
         }
     }
@@ -45,7 +45,34 @@ function InstructionsManual() {
     // const manual = <div className={"modal-container"}>
     const manual = <div style={styles.modalContainer}>
         <div style={styles.modal}>
-           Add Instructions here in the end.
+            <div className="instructions-text">
+
+           <div className="instructions-title">Instructions to Use</div>
+           <ul>
+            <li className="instructions-list-item">
+           This program is a <b>
+            Visualization of how the Sorting Algorithms work in the real world.
+            </b>
+            </li>
+            <li className="instructions-list-item">
+           To get started, <br/> <span style={{fontSize: "28px"}} >Choose Array Size</span> <br/> (or collection of numbers) you want to sort by entering it in the given input field. I would suggest to go for the maximum size that is 132.
+            </li>
+            <li className="instructions-list-item">
+           Press the <span className="instructions-button">Generate Random Array</span> button to generate the array. 
+            </li>
+            <li className="instructions-list-item">
+           Choose the speed at which you want the visualiser to run with the <span className="instructions-button">Choose Speed</span> input.
+           The <span className="instructions-button">Minimum</span> speed is 1 second and the <span className="instructions-button">Maximum</span> speed is 5 milliseconds.
+            </li>
+            <li className="instructions-list-item">
+           To start sorting, just click on the desired sorting button.<br/> (<span className="instructions-button-disabled">Merge Sort</span> is currently under Development)
+            </li>
+            <li className="instructions-list-item">
+           You can stop the sorting midway with the <span className="instructions-button">Stop Sorting</span> button
+            </li>
+           </ul>
+            
+            </div>
         </div>
         <button onClick={() => modalToggleHandler()} style={styles.modalToggleButton}>
             {isModalOpen ? <div>Close</div> : <div>Instructions</div>}
