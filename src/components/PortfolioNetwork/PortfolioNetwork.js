@@ -6,7 +6,7 @@ const Network = () => {
     const redirects = {
         "DIGITAL PORTFOLIO" : "https://naveen-kewlani.web.app/",
         "HIMACHAL HOMESTAYS" : "https://himachal-homestays.web.app/",
-        "SORTING ALGORITHM VISUALISER": "sortingalgvisualizer.netlify.app",
+        "SORTING ALGORITHM VISUALISER": "https://sortingalgvisualizer.netlify.app",
         "PROFILEWALLA": "https://profilewalla.com/",
     }
 
