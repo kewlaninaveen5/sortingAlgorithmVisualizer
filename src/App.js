@@ -2,6 +2,7 @@ import { React, useState, useEffect, useRef } from 'react'
 import './App.css';
 import InstructionsManual from './components/InstructionsManual/InstructionsManual';
 import Graph from "./components/Graph/Graph.js";
+import Network from './components/PortfolioNetwork/PortfolioNetwork';
 
 const App = () => {
 
@@ -472,6 +473,7 @@ const App = () => {
     <div className="page-container">
       <div>
         <InstructionsManual />
+        <Network />
       </div>
       <div className={"graph-on-screen"}>
         <h1>Sorting Algorithm Visualizer</h1>
