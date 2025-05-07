@@ -3,6 +3,8 @@ import './App.css';
 import InstructionsManual from './components/InstructionsManual/InstructionsManual';
 import Graph from "./components/Graph/Graph.js";
 import Network from './components/PortfolioNetwork/PortfolioNetwork';
+// import MergeSort, { MergeSortKey, MergeSortDesc } from './MergeSort.js';
+import { initMergeSort, executeMergeStep } from './MergeSort.js';
 
 const App = () => {
 
@@ -20,6 +22,7 @@ const App = () => {
   const [swapCounter, setSwapCounter] = useState(0);
   const [delay, setDelay] = useState(5);
   const [specialStoredValue, setSpecialStoredValue] = useState(0);
+  const [Remaining, setRemaining] = useState(0);
 
   const BUBBLE_SORT = "BUBBLE SORT"
   const SELECTION_SORT = "SELECTION SORT"
@@ -27,6 +30,7 @@ const App = () => {
   const INSERTION_SORT = "INSERTION SORT"
   const QUICK_SORT = "QUICK SORT"
 
+  const print = arg => console.log(arg)
 
 
   useEffect(() => {
@@ -171,11 +175,13 @@ const App = () => {
   }, [i, j, inputArray, swapCounter, sorting, sortType, delay, specialStoredValue]);
 
   useEffect(() => {
+    print("entered quick sort use effect")
     if (sorting && sortType === QUICK_SORT) {
       setTimeout(() => {
 
         const oldArray = [...inputArray];
         const aux = [...specialStoredValue]
+        console.log("a2: ", aux)
         let n = 0, j1 = null, i1 = null, pivotIndex = null;
 
         if (j === -2) {
@@ -385,8 +391,134 @@ const App = () => {
   //   }
   // }, [i, j, inputArray, swapCounter, sorting, sortType, delay, specialStoredValue ]);
   
+  // useEffect(() => {
+  //   if (sorting && sortType === MERGE_SORT) {
+  //     setTimeout(() => {
+  //       let arr = [...inputArray];
+  //       let aux = [...specialStoredValue];
+  //       let i1 = i;
+  //       let j1 = j;
+  
+  //       if (j1 === -2) {
+  //         // Start of merge sort
+  //         setI(0);
+  //         setJ(1);
+  //         return;
+  //       }
+  
+  //       const merge = (arr, l, m, r) => {
+  //         let n1 = m - l + 1;
+  //         let n2 = r - m;
+  
+  //         let L = arr.slice(l, m + 1);
+  //         let R = arr.slice(m + 1, r + 1);
+  
+  //         let i = 0, j = 0, k = l;
+  //         const nodes = barRef.current.children;
+  
+  //         while (i < n1 && j < n2) {
+  //           nodes[k].style.backgroundColor = "red";
+  //           if (L[i] <= R[j]) {
+  //             arr[k] = L[i];
+  //             i++;
+  //           } else {
+  //             arr[k] = R[j];
+  //             j++;
+  //             setSwapCounter(prev => prev + 1);
+  //           }
+  //           k++;
+  //         }
+  
+  //         while (i < n1) {
+  //           arr[k] = L[i];
+  //           i++;
+  //           k++;
+  //         }
+  
+  //         while (j < n2) {
+  //           arr[k] = R[j];
+  //           j++;
+  //           k++;
+  //         }
+  
+  //         return arr;
+  //       };
+  
+  //       const mergeSortHelper = (arr, l, r) => {
+  //         if (l < r) {
+  //           let m = Math.floor((l + r) / 2);
+  
+  //           arr = mergeSortHelper(arr, l, m);
+  //           arr = mergeSortHelper(arr, m + 1, r);
+  //           arr = merge(arr, l, m, r);
+  //         }
+  //         return arr;
+  //       };
+  
+  //       arr = mergeSortHelper(arr, 0, arr.length - 1);
+  
+  //       setInputArray(arr);
+  //       const nodes = barRef.current.children;
+  //       for (let n = 0; n < nodes.length; n++) {
+  //         nodes[n].style.backgroundColor = "#99c234";
+  //       }
+  
+  //       setSorting(false);
+  //       setSortType("");
+  //     }, delay);
+  //   }
+  // }, [sorting, sortType, inputArray, delay, i, j, specialStoredValue]);
+  
+// Step 1: Initialize merge sort steps if not already done
+
+useEffect(() => {
+
+  if (sorting && sortType === MERGE_SORT) {
+    let arr = inputArray
+    let b = true
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] < arr[i-1]) {
+        b = false
+        break
+      }
+    }
+    if (b) {
+      const nodes = barRef.current.children;
+      for (let n = 0; n < nodes.length; n++) {
+        nodes[n].style.backgroundColor = "#99c234";
+      }
+      setSortType("")
+      setSorting(false)
+    }
+    else {
+    print("merge sort starts")
+    let steps = [...specialStoredValue]; // initially empty or stored in state
+    if (steps.length === 0) {
+      steps = initMergeSort(inputArray.length);
+      setSpecialStoredValue(steps); // update state
+    }
+
+    if (steps.length > 0) {
+      setTimeout(() => {
+        const [nextStep, ...remaining] = steps;
+        executeMergeStep(inputArray, nextStep, setInputArray, setSwapCounter, barRef.current.children);
+        setSpecialStoredValue(remaining);
+      }, delay);
+    } 
+  }
+}
+
+
+  // }
+}, [inputArray, sorting, sortType, specialStoredValue, delay]);
+
+
   const stopSortingHandler = () => {
     setSorting(false)
+    // const nodes = barRef.current.children;
+    //   for (let n = 0; n < nodes.length; n++) {
+    //     nodes[n].style.backgroundColor = "#99c234";
+    //   }
   }
 
   const lengthOfArrayHandler = (e) => {
@@ -447,7 +579,7 @@ const App = () => {
     for (let n = 0; n < oldArray.length; n++){
       aux.push(0)
     }
-    console.log(aux)
+    console.log("QUICK AUX: ", aux)
     setSorting(true)
     setI(-1);
     setJ(-2);
@@ -456,17 +588,10 @@ const App = () => {
   }
 
   const startMergeSort = () => {
-    const oldArray = inputArray 
-    const aux = [];
-    for (let n = 0; n < oldArray.length; n++){
-      aux.push(0)
-    }
-    console.log(aux)
-    setSortType(MERGE_SORT)
     setSorting(true)
-    setI(-1);
-    setJ(-2);
-    setSpecialStoredValue(aux);
+    setI(true);
+    setSpecialStoredValue([]);
+    setSortType(MERGE_SORT)
   }
 
   return (
@@ -503,9 +628,13 @@ const App = () => {
           <button disabled={sorting ? true : false} className="button" onClick={() => startSelectionSort()}>
             start {SELECTION_SORT}
           </button>
-          <button disabled className="button" onClick={() => startMergeSort()}>
-            start {MERGE_SORT} <br /> (Under Development)
+          <button 
+          // disabled
+           className="button" onClick={() => startMergeSort()}>
+            start {MERGE_SORT} 
+            {/* <br /> (Under Development) */}
           </button>
+          {/* <MergeSort /> */}
           <button disabled={sorting ? true : false} className="button" onClick={() => startInsertionSort()}>
             start {INSERTION_SORT}
           </button>

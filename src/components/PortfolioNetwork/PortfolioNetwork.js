@@ -7,7 +7,7 @@ const Network = () => {
         "DIGITAL PORTFOLIO" : "https://naveen-kewlani.web.app/",
         "HIMACHAL HOMESTAYS" : "https://himachal-homestays.web.app/",
         "SORTING ALGORITHM VISUALISER": "https://sortingalgvisualizer.netlify.app",
-        "PROFILEWALLA": "https://profilewalla.com/",
+        // "PROFILEWALLA": "https://profilewalla.com/",
     }
 
     const list = Object.entries(redirects).map((keyValueArray, key) => {
