@@ -15,7 +15,26 @@
     transition: 300ms;
 }
 
+.profile-image {
+    width: 120px;
+    border-radius: 30px;
+    margin-left: 30px;
+    vertical-align: top;
+}
 
+.left-align{
+    text-align: left;
+}
+
+.skills {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+    padding-left: 10px;
+    padding-top: 4px;
+    /* background-color: red; */
+    width: 40%;
+}
 
 .redirect {
     text-align: left;

@@ -16,13 +16,14 @@ const App = () => {
   const [lenghtOfArray, setLenghtOfArray] = useState(52);
   const [i, setI] = useState(0);
   const [j, setJ] = useState(0);
+  const[rangeValue, setRangeValue] = useState(5)
   // const [someNumber, setSomeNumber] = useState(1);
   const [sortType, setSortType] = useState("");
   const [sorting, setSorting] = useState(false);
   const [swapCounter, setSwapCounter] = useState(0);
   const [delay, setDelay] = useState(5);
   const [specialStoredValue, setSpecialStoredValue] = useState(0);
-  const [Remaining, setRemaining] = useState(0);
+  // const [Remaining, setRemaining] = useState(0);
 
   const BUBBLE_SORT = "BUBBLE SORT"
   const SELECTION_SORT = "SELECTION SORT"
@@ -36,6 +37,13 @@ const App = () => {
   useEffect(() => {
     renderCount.current += 1;
   });
+
+    //   useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setSearchProduct(searchInput)
+    //     }, 300);
+    //     return () => clearTimeout(timer);
+    // }, [searchInput, setSearchProduct])
 
 
   useEffect(() => {
@@ -181,7 +189,7 @@ const App = () => {
 
         const oldArray = [...inputArray];
         const aux = [...specialStoredValue]
-        console.log("a2: ", aux)
+        // console.log("a2: ", aux)
         let n = 0, j1 = null, i1 = null, pivotIndex = null;
 
         if (j === -2) {
@@ -191,7 +199,7 @@ const App = () => {
               i1 = j1-1;
               break;
             }
-            console.log(n);
+            // console.log(n);
             n++;
           } 
         } else {
@@ -210,7 +218,7 @@ const App = () => {
           return;
         }
         
-        console.log(n);
+        // console.log(n);
 
         while (n < oldArray.length ) {
           if (aux[n] === oldArray[n]){
@@ -218,7 +226,7 @@ const App = () => {
             break;
           }
           barRef.current.children[n].style.backgroundColor = "#8888ff";
-          console.log(n);
+          // console.log(n);
           n++;
         }
         pivotIndex = pivotIndex === null ? oldArray.length-1 :  pivotIndex ;
@@ -265,212 +273,6 @@ const App = () => {
     }
   }, [i, j, inputArray, swapCounter, sorting, sortType, delay, specialStoredValue ]);
 
-  // useEffect(() => {
-  //   if (sorting && sortType === MERGE_SORT) {
-  //     setTimeout(() => {
-  //       const oldArray = [...inputArray];
-  //       const aux = [...specialStoredValue]
-  //       let n = 0, j1 = null, i1 = null, pivotIndex = null, low = null, high = null, middle = null;
-  //       let depth = someNumber;
-
-  //       if (j === -2) {
-  //         while (n < oldArray.length ) {
-  //           if (aux[n] === 0){
-  //             low = n;
-  //             // j1 = n;
-  //             // i1 = j1-1;
-  //             break;
-  //           }
-  //           n++;
-  //         } 
-  //         console.log(n);
-  //       } else {
-  //         // j1 = j;
-  //         // i1 = i;
-  //         // n = j;
-  //       }
-  //       // if (j1 == null){
-  //       //   const nodes = barRef.current.children
-  //       //   for (let n = 0; n < nodes.length; n++) {
-  //       //     nodes[n].style.backgroundColor = "#99c234"
-  //       //   }
-  //       //   // barRef.current.children
-  //       //   setSorting(false);
-  //       //   setSortType("")
-  //       //   return;
-  //       // }
-        
-  //       console.log("low: ", low);
-
-  //       while (n < oldArray.length ) {
-  //         if (aux[n] !== depth){
-  //           high = n;
-  //           break;
-  //         }
-  //         // barRef.current.children[n].style.backgroundColor = "#8888ff";
-  //         n++;
-  //       }
-
-  //       high = high === null ? oldArray.length-1 :  high ;
-  //       console.log("high: ", high);
-
-  //       if (low < high && low + 1 !== high) {
-  //         middle = Math.floor((low+high)/2);
-  //         depth++;
-  //         aux[middle] = depth;
-  //         setSomeNumber(depth);
-  //         setSpecialStoredValue(aux);
-  //         return
-  //       } else if (low + 1 === high) {
-  //         if (oldArray[low] > oldArray[high]){
-  //           let temp = oldArray[low];
-  //           oldArray[low] = oldArray[high];
-  //           oldArray[high] = temp;
-  //           aux[low] = oldArray[low];
-  //           aux[high] = oldArray[high];
-  //           setSpecialStoredValue(aux);
-  //           setSwapCounter(oldSwapCount + 1);
-  //           setInputArray(oldArray);
-  //           // setI(i1)
-  //           // setJ(j1+1)  
-  //           return;
-  //         }
-  //         aux[low] = oldArray[low];
-  //         aux[high] = oldArray[high];
-  //         setSpecialStoredValue(aux);
-
-  //         return
-
-  //       }
-
-
-
-
-
-  //       pivotIndex = pivotIndex === null ? oldArray.length-1 :  pivotIndex ;
-  //       barRef.current.children[pivotIndex].style.backgroundColor = "red";
-  //       const oldSwapCount = swapCounter;
-
-
-  //       if (j1 < pivotIndex){
-  //         if (j1)
-  //       barRef.current.children[j1-1].style.backgroundColor = "#8888ff";
-  //       barRef.current.children[j1].style.backgroundColor = "pink";
-
-  //         if(oldArray[j1] < oldArray[pivotIndex]) {
-  //           i1++;
-  //           barRef.current.children[i1].style.backgroundColor = "#ff9900";
-  //           // barRef.current.children[j1].style.backgroundColor = "green";
-  //             let temp = oldArray[j1];
-  //             oldArray[j1] = oldArray[i1];
-  //             oldArray[i1] = temp;
-  //             setSwapCounter(oldSwapCount + 1);
-  //             setInputArray(oldArray);
-  //             setI(i1)
-  //             setJ(j1+1)  
-  //             return;
-  //           }
-  //           setI(i1)
-  //           setJ(j1 +1)
-  //           return
-  //       }
-  //       if (j1)
-  //       barRef.current.children[j1-1].style.backgroundColor = "#8888ff";
-  //       let temp = oldArray[i1 +1];
-  //       oldArray[i1+1] = oldArray[pivotIndex] ;
-  //       aux[i1+1] = oldArray[pivotIndex];
-  //       barRef.current.children[i1+1].style.backgroundColor = "green";
-  //       oldArray[pivotIndex] = temp;
-  //       barRef.current.children[pivotIndex].style.backgroundColor = "#8888ff";
-  //       setSwapCounter(oldSwapCount + 1);
-  //       setInputArray(oldArray);
-  //       setSpecialStoredValue(aux);
-  //       setJ(-2)
-  //       return;
-  //     }, delay);
-  //   }
-  // }, [i, j, inputArray, swapCounter, sorting, sortType, delay, specialStoredValue ]);
-  
-  // useEffect(() => {
-  //   if (sorting && sortType === MERGE_SORT) {
-  //     setTimeout(() => {
-  //       let arr = [...inputArray];
-  //       let aux = [...specialStoredValue];
-  //       let i1 = i;
-  //       let j1 = j;
-  
-  //       if (j1 === -2) {
-  //         // Start of merge sort
-  //         setI(0);
-  //         setJ(1);
-  //         return;
-  //       }
-  
-  //       const merge = (arr, l, m, r) => {
-  //         let n1 = m - l + 1;
-  //         let n2 = r - m;
-  
-  //         let L = arr.slice(l, m + 1);
-  //         let R = arr.slice(m + 1, r + 1);
-  
-  //         let i = 0, j = 0, k = l;
-  //         const nodes = barRef.current.children;
-  
-  //         while (i < n1 && j < n2) {
-  //           nodes[k].style.backgroundColor = "red";
-  //           if (L[i] <= R[j]) {
-  //             arr[k] = L[i];
-  //             i++;
-  //           } else {
-  //             arr[k] = R[j];
-  //             j++;
-  //             setSwapCounter(prev => prev + 1);
-  //           }
-  //           k++;
-  //         }
-  
-  //         while (i < n1) {
-  //           arr[k] = L[i];
-  //           i++;
-  //           k++;
-  //         }
-  
-  //         while (j < n2) {
-  //           arr[k] = R[j];
-  //           j++;
-  //           k++;
-  //         }
-  
-  //         return arr;
-  //       };
-  
-  //       const mergeSortHelper = (arr, l, r) => {
-  //         if (l < r) {
-  //           let m = Math.floor((l + r) / 2);
-  
-  //           arr = mergeSortHelper(arr, l, m);
-  //           arr = mergeSortHelper(arr, m + 1, r);
-  //           arr = merge(arr, l, m, r);
-  //         }
-  //         return arr;
-  //       };
-  
-  //       arr = mergeSortHelper(arr, 0, arr.length - 1);
-  
-  //       setInputArray(arr);
-  //       const nodes = barRef.current.children;
-  //       for (let n = 0; n < nodes.length; n++) {
-  //         nodes[n].style.backgroundColor = "#99c234";
-  //       }
-  
-  //       setSorting(false);
-  //       setSortType("");
-  //     }, delay);
-  //   }
-  // }, [sorting, sortType, inputArray, delay, i, j, specialStoredValue]);
-  
-// Step 1: Initialize merge sort steps if not already done
-
 useEffect(() => {
 
   if (sorting && sortType === MERGE_SORT) {
@@ -512,6 +314,16 @@ useEffect(() => {
   // }
 }, [inputArray, sorting, sortType, specialStoredValue, delay]);
 
+//   const handleMouseUp = () => {
+//   changeSpeedHandler(rangeValue); // Call handler only when mouse is released
+// };
+const handlePointerUp = (e) => {
+  // console.log("e: ", e)
+  const finalValue = e.target.value;
+  setRangeValue(finalValue);
+  setDelay(500 / finalValue)
+  // changeSpeedHandler(finalValue); // optional: if you want to do something with it
+};
 
   const stopSortingHandler = () => {
     setSorting(false)
@@ -523,13 +335,8 @@ useEffect(() => {
 
   const lengthOfArrayHandler = (e) => {
     let v = parseInt(e.target.value);
-    console.log(v);
+    // console.log(v);
     setLenghtOfArray(v)
-  }
-
-  const changeSpeedHandler = (e) => {
-    console.log(e.target.value)
-    setDelay(500 / e.target.value)
   }
 
   const generateRandomArray = (max) => {
@@ -579,7 +386,7 @@ useEffect(() => {
     for (let n = 0; n < oldArray.length; n++){
       aux.push(0)
     }
-    console.log("QUICK AUX: ", aux)
+    // console.log("QUICK AUX: ", aux)
     setSorting(true)
     setI(-1);
     setJ(-2);
@@ -606,7 +413,7 @@ useEffect(() => {
         <button disabled={sorting ? false : true} className="button" onClick={() => stopSortingHandler()}>
             Stop Sorting
           </button>
-        <h1>Total Page Renders: {renderCount.current}</h1>
+        {/*<h1>Total Page Renders: {renderCount.current}</h1>*/}
         <div>
           Total Number of Swaps in last sort : {swapCounter}
         </div>
@@ -616,7 +423,7 @@ useEffect(() => {
         <div className={"details-container"}>
           <div className="choose-array-size">
             <div>Choose array size</div>
-            <div className={"small-text"}>(Choose a number between 5 and 132 both Inclusive)</div>
+            <div className={"small-text"}>(between 5 and 132 both Inclusive)</div>
           </div>
           <input placeholder="ENTER ARRAY LENGTH" className="array-length-input" type="number" id="lengthInput" value={lenghtOfArray.toString()} onChange={(e) => lengthOfArrayHandler(e)} />
           <button disabled={sorting ? true : false} className="button" onClick={() => generateRandomArray(999, 4000)}>
@@ -648,12 +455,16 @@ useEffect(() => {
             disabled={sorting ? true : false}
               type="range"
               // ref="inputRangeRef" 
-              onChange={(e) => changeSpeedHandler(e)}
+              // onChange={(e) => changeSpeedHandler(e)}
               className="input-range__slider"
+              // onChange={(e) => setRangeValue(e.target.value)}
+              // onMouseUp={handleMouseUp}
               min="1"
               max="100"
               step="0.1"
-              defaultValue="100"
+              // defaultValue="100"
+              defaultValue={rangeValue}
+              onPointerUp={handlePointerUp}
             />
             <div className="min-max-container">
             <div>Min</div>
